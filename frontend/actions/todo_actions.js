@@ -5,3 +5,8 @@ export const recieveTodos = todos => ({
   type: RECIEVE_TODOS,
   todos
 });
+
+export const recieveTodo = todo => ({
+  type: RECIEVE_TODO,
+  todo
+});
