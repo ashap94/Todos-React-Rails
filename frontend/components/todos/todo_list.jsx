@@ -8,7 +8,15 @@ const TodoList = props => {
   }, []);
 
   let list = props.todos.map(todo => {
-    return <TodoListItem todo={todo} />;
+    return (
+      <TodoListItem
+        todo={todo}
+        removeTodo={props.removeTodo}
+        recieveTodo={props.recieveTodo}
+      />
+    );
+    // recieveTodo prop/action here in the list item is to change
+    // 'done' boolean property as a button that will be rendered in component
   });
 
   return (
