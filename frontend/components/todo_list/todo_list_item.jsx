@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import TodoDetailViewContainer from "./todo_detail_view_container";
+import TodoDetailView from "./todo_detail_view";
 
 const TodoListItem = props => {
   const [done, setDone] = useState(false);
+  const [detail, setDetail] = useState(false);
 
   useEffect(() => {
     if (props.todo.done === true) {
@@ -9,10 +12,6 @@ const TodoListItem = props => {
     }
     // no need for an else statement because done property of todo is already false
   }, []);
-
-  const deleteTodo = () => {
-    props.removeTodo(props.todo.id);
-  };
 
   const updateTodo = () => {
     let newTodo;
@@ -26,14 +25,28 @@ const TodoListItem = props => {
     props.recieveTodo(newTodo);
   };
 
-  let updateTitle = done === true ? "Undo" : "Done";
+  const toggleDetail = () => {
+    if (detail === false) {
+      setDetail(true);
+    } else {
+      setDetail(false);
+    }
+  };
+
+  // let updateTitle = done === true ? "Undo" : "Done";
+  let detailDisplay;
+  if (detail === true) {
+    detailDisplay = <TodoDetailViewContainer todo={props.todo} />;
+  }
 
   return (
     <li>
-      <h2>{props.todo.title}</h2>
-      <p>{props.todo.body}</p>
-      <button onClick={deleteTodo}>Delete</button>
-      <button onClick={updateTodo}>{updateTitle}</button>
+      <div>
+        <h2 onClick={toggleDetail}>{props.todo.title}</h2>
+        {/* <p>{props.todo.body}</p> */}
+        <button onClick={updateTodo}>{done ? "Undo" : "Done"}</button>
+      </div>
+      {detailDisplay}
     </li>
   );
 };

@@ -11,8 +11,8 @@ const msp = state => {
 
 const mdp = dispatch => {
   return {
-    recieveTodo: todo => dispatch(recieveTodo(todo)),
-    removeTodo: id => dispatch(removeTodo(id))
+    recieveTodo: todo => dispatch(recieveTodo(todo))
+    // removeTodo: id => dispatch(removeTodo(id))
   };
 };
 

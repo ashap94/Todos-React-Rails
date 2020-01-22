@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import TodoListContainer from "../components/todos/todo_list_container";
+import TodoListContainer from "./todo_list/todo_list_container";
 
 const App = () => (
   <div className="app">
