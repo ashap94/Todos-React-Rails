@@ -5,7 +5,7 @@ import * as TodoActions from "./actions/todo_actions";
 import * as StepsActions from "./actions/step_actions";
 // import App from "./components/app";
 import Root from "./components/root";
-import { allTodos, allSteps } from "./reducers/selectors";
+import { allTodos, stepsByTodoId } from "./reducers/selectors";
 
 console.log("WHAT ARE THE TODOS ACTIONS? :  ", TodoActions);
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.recieveSteps = StepsActions.recieveSteps;
   window.recieveStep = StepsActions.recieveStep;
-  window.allSteps = allSteps;
+  window.stepsByTodoId = stepsByTodoId;
 
   window.getState = store.getState;
   window.dispatch = store.dispatch;
