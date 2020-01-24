@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StepListItemContainer from "./step_list_item_container";
+import StepForm from "./step_form";
 
 const StepList = props => {
   // steps for specific todo, utilize prop todo_id to
@@ -11,17 +12,7 @@ const StepList = props => {
   return (
     <div>
       <ul>{stepItems}</ul>
-      <form action="">
-        <label>
-          Title:
-          <input />
-        </label>
-        <label>
-          Body:
-          <textarea cols="30" rows="10"></textarea>
-        </label>
-        <button>Create Step!</button>
-      </form>
+      <StepForm recieveStep={props.recieveStep} todo_id={props.todo_id} />
     </div>
   );
 };

@@ -9,8 +9,8 @@ const TodoDetailView = props => {
   return (
     <div>
       <p>{props.todo.body}</p>
-      <button onClick={deleteTodo}>Delete</button>
       <StepListContainer todo_id={props.todo.id} />
+      <button onClick={deleteTodo}>Delete Todo</button>
     </div>
   );
 };

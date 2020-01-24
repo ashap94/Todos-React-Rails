@@ -7,13 +7,11 @@ const msp = (state, ownProps) => {
   // may need to add logic for creating recieving steps that only associate with one
   // todo
 
-  let todoId = ownProps.todoId;
-  //   let steps = Object.keys(state.steps).filter(step => {
-  //     step.todo_id === todoId;
-  //   });
+  let steps = stepsByTodoId(state, ownProps.todo_id);
+  console.log("HERE ARE WHAT THE STEPS LOOK LIKE:   ", steps);
 
   return {
-    steps: stepsByTodoId(state, todoId),
+    steps,
     todo_id: ownProps.todo_id
   };
 };
