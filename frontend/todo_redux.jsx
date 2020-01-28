@@ -10,7 +10,9 @@ import { allTodos, stepsByTodoId } from "./reducers/selectors";
 console.log("WHAT ARE THE TODOS ACTIONS? :  ", TodoActions);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const preloadedState = {};
+  const preloadedState = localStorage.state
+    ? JSON.parse(localStorage.state)
+    : {};
   const store = configureStore(preloadedState);
   window.store = store;
 
