@@ -10,9 +10,11 @@ import { allTodos, stepsByTodoId } from "./reducers/selectors";
 console.log("WHAT ARE THE TODOS ACTIONS? :  ", TodoActions);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const preloadedState = localStorage.state
-    ? JSON.parse(localStorage.state)
-    : {};
+  const preloadedState =
+    // localStorage.state
+    //   ? JSON.parse(localStorage.state)
+    // :
+    {};
   const store = configureStore(preloadedState);
   window.store = store;
 
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.recieveSteps = StepsActions.recieveSteps;
   window.recieveStep = StepsActions.recieveStep;
+  window.fetchTodos = TodoActions.fetchTodos;
   window.stepsByTodoId = stepsByTodoId;
 
   window.getState = store.getState;

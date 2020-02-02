@@ -3,14 +3,23 @@ import TodoListItem from "./todo_list_item";
 import TodoForm from "./todo_form";
 
 const TodoList = props => {
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
-    console.log("HERE ARE THE TODOS:   ", props.todos);
+    props.fetchTodos().then(() => {
+      setLoaded(true);
+    });
   }, []);
+
+  if (!loaded) {
+    return null;
+  }
 
   let list = props.todos.map(todo => {
     return (
       <TodoListItem
         todo={todo}
+        key={todo.id}
         removeTodo={props.removeTodo}
         recieveTodo={props.recieveTodo}
       />
