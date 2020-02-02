@@ -5,6 +5,7 @@ class Api::TodosController < ApplicationController
         # going to have tp iterate through all todos, and insert into a 
         # json servable object, do this in the jbuilder index view
         # render json: Todo.all.where(user_id: current_user.id)
+        render json: Todo.all
     end
 
     def show
@@ -22,7 +23,7 @@ class Api::TodosController < ApplicationController
 
     def update
         @todo = Todo.find(params[:id])
-        if @todo.update(todo_update_params)
+        if @todo.update(todo_params)
             render json: @todo
         else
             render json: @todo.errors.full_messages, status: 422

@@ -29,4 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const root = document.getElementById("content");
   ReactDom.render(<Root store={store} />, root);
+
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/api/todos"
+  // }).then(
+  //   todos => console.log(todos),
+  //   error => console.log(error)
+  // );
 });
