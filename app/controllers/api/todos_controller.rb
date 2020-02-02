@@ -4,6 +4,7 @@ class Api::TodosController < ApplicationController
         # let all_todos = Todo.all
         # going to have tp iterate through all todos, and insert into a 
         # json servable object, do this in the jbuilder index view
+        # render json: Todo.all.where(user_id: current_user.id)
     end
 
     def show
@@ -29,6 +30,9 @@ class Api::TodosController < ApplicationController
     end
 
     def destroy
+        @todo = Todo.find(params[:id])
+        @todo.destroy
+        render json: @todo
     end
 
     private

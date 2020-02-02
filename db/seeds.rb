@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Todo.delete_all
+
+Todo.create!(
+    title: 'Contemplate the meaning of life',
+    body: 'between homeworks and readings',
+    done: false
+)
+
+Todo.create!(
+    title: 'Code everyday',
+    body: 'get better at them algo\'s, data structure\'s and projects',
+    done: false
+)
