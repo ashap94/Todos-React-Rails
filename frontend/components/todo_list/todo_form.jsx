@@ -31,7 +31,16 @@ const TodoForm = props => {
       setBody("");
       setTitle("");
     });
+    props.clearErrors();
   };
+
+  let titleError = props.errors.includes("Title can't be blank")
+    ? "Title can't be blank"
+    : null;
+
+  let bodyError = props.errors.includes("Body can't be blank")
+    ? "Body can't be blank"
+    : null;
 
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
@@ -42,9 +51,10 @@ const TodoForm = props => {
           value={title}
           onChange={updateTitle}
           placeholder="buy milk"
-          required
+          // required
         />
       </label>
+      {titleError}
       <label>
         Body:
         <textarea
@@ -54,9 +64,10 @@ const TodoForm = props => {
           cols="20"
           onChange={updateBody}
           placeholder="soy, buy flavorless and the cheapest one"
-          required
+          // required
         ></textarea>
       </label>
+      {bodyError}
       <button className="create-button">Create Todo!</button>
     </form>
   );

@@ -7,10 +7,12 @@ import {
   fetchTodos,
   createTodo
 } from "../../actions/todo_actions";
+import { clearErrors } from "../../actions/error_actions";
 
 const msp = state => {
   return {
-    todos: allTodos(state)
+    todos: allTodos(state),
+    errors: state.errors
   };
 };
 
@@ -18,7 +20,9 @@ const mdp = dispatch => {
   return {
     recieveTodo: todo => dispatch(recieveTodo(todo)),
     fetchTodos: () => dispatch(fetchTodos()),
-    createTodo: todo => dispatch(createTodo(todo))
+    createTodo: todo => dispatch(createTodo(todo)),
+    clearErrors: () => dispatch(clearErrors())
+
     // removeTodo: id => dispatch(removeTodo(id))
   };
 };

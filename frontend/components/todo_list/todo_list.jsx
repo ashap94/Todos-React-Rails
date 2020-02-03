@@ -4,12 +4,17 @@ import TodoForm from "./todo_form";
 
 const TodoList = props => {
   const [loaded, setLoaded] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     props.fetchTodos().then(() => {
       setLoaded(true);
     });
   }, []);
+
+  useEffect(() => {
+    setErrors(props.errors);
+  }, [props.errors]);
 
   // useEffect(() => {}, [props.todos]);
 
@@ -33,7 +38,11 @@ const TodoList = props => {
   return (
     <div>
       <h3>Todo List goes here!</h3>
-      <TodoForm createTodo={props.createTodo} />
+      <TodoForm
+        createTodo={props.createTodo}
+        errors={errors}
+        clearErrors={props.clearErrors}
+      />
       <ul>{list}</ul>
     </div>
   );
