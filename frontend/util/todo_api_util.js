@@ -10,3 +10,10 @@ export const createTodo = todo =>
     url: `/api/todos`,
     data: { todo }
   });
+
+export const updateTodo = todo =>
+  $.ajax({
+    method: `PATCH`,
+    url: `/api/todos/${todo.id}`,
+    data: { todo }
+  });

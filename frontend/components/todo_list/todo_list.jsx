@@ -28,7 +28,8 @@ const TodoList = props => {
         todo={todo}
         key={todo.id}
         removeTodo={props.removeTodo}
-        recieveTodo={props.recieveTodo}
+        clearErrors={props.clearErrors}
+        updateTodo={props.updateTodo}
       />
     );
     // recieveTodo prop/action here in the list item is to change

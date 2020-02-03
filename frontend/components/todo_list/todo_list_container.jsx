@@ -5,7 +5,8 @@ import {
   recieveTodo,
   removeTodo,
   fetchTodos,
-  createTodo
+  createTodo,
+  updateTodo
 } from "../../actions/todo_actions";
 import { clearErrors } from "../../actions/error_actions";
 
@@ -18,10 +19,10 @@ const msp = state => {
 
 const mdp = dispatch => {
   return {
-    recieveTodo: todo => dispatch(recieveTodo(todo)),
     fetchTodos: () => dispatch(fetchTodos()),
     createTodo: todo => dispatch(createTodo(todo)),
-    clearErrors: () => dispatch(clearErrors())
+    clearErrors: () => dispatch(clearErrors()),
+    updateTodo: todo => dispatch(updateTodo(todo))
 
     // removeTodo: id => dispatch(removeTodo(id))
   };

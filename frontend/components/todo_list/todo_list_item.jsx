@@ -13,16 +13,21 @@ const TodoListItem = props => {
     // no need for an else statement because done property of todo is already false
   }, []);
 
-  const updateTodo = () => {
-    let newTodo;
-    if (props.todo.done === true) {
-      newTodo = Object.assign({}, props.todo, { done: false });
-      setDone(false);
-    } else {
-      newTodo = Object.assign({}, props.todo, { done: true });
-      setDone(true);
-    }
-    props.recieveTodo(newTodo);
+  const updateTodo = e => {
+    e.preventDefault();
+    let toggleTodo = Object.assign({}, props.todo, {
+      done: !props.todo.done
+    });
+    setDone(!props.todo.done);
+    props.updateTodo(toggleTodo);
+
+    // if (props.todo.done === true) {
+    //   toggleTodo = Object.assign({}, props.todo, { done: false });
+    //   setDone(false);
+    // } else {
+    //   toggleTodo = Object.assign({}, props.todo, { done: true });
+    //   setDone(true);
+    // }
   };
 
   const toggleDetail = () => {

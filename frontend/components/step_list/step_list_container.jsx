@@ -8,7 +8,7 @@ const msp = (state, ownProps) => {
   // todo
 
   let steps = stepsByTodoId(state, ownProps.todo_id);
-  console.log("HERE ARE WHAT THE STEPS LOOK LIKE:   ", steps);
+  // console.log("HERE ARE WHAT THE STEPS LOOK LIKE:   ", steps);
 
   return {
     steps,

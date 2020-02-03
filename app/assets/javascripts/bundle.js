@@ -158,7 +158,7 @@ var removeStep = function removeStep(id) {
 /*!******************************************!*\
   !*** ./frontend/actions/todo_actions.js ***!
   \******************************************/
-/*! exports provided: RECIEVE_TODOS, RECIEVE_TODO, REMOVE_TODO, recieveTodos, recieveTodo, removeTodo, fetchTodos, createTodo */
+/*! exports provided: RECIEVE_TODOS, RECIEVE_TODO, REMOVE_TODO, recieveTodos, recieveTodo, removeTodo, fetchTodos, createTodo, updateTodo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -171,6 +171,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeTodo", function() { return removeTodo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTodos", function() { return fetchTodos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTodo", function() { return createTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTodo", function() { return updateTodo; });
 /* harmony import */ var _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/todo_api_util */ "./frontend/util/todo_api_util.js");
 /* harmony import */ var _error_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error_actions */ "./frontend/actions/error_actions.js");
 var RECIEVE_TODOS = "RECIEVE_TODOS";
@@ -206,6 +207,15 @@ var fetchTodos = function fetchTodos() {
 var createTodo = function createTodo(todo) {
   return function (dispatch) {
     return _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__["createTodo"](todo).then(function (todo) {
+      return dispatch(recieveTodo(todo));
+    }, function (err) {
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(err.responseJSON));
+    });
+  };
+};
+var updateTodo = function updateTodo(todo) {
+  return function (dispatch) {
+    return _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__["updateTodo"](todo).then(function (todo) {
       return dispatch(recieveTodo(todo));
     }, function (err) {
       return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(err.responseJSON));
@@ -404,8 +414,8 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state, ownProps) {
   // may need to add logic for creating recieving steps that only associate with one
   // todo
-  var steps = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["stepsByTodoId"])(state, ownProps.todo_id);
-  console.log("HERE ARE WHAT THE STEPS LOOK LIKE:   ", steps);
+  var steps = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["stepsByTodoId"])(state, ownProps.todo_id); // console.log("HERE ARE WHAT THE STEPS LOOK LIKE:   ", steps);
+
   return {
     steps: steps,
     todo_id: ownProps.todo_id
@@ -727,7 +737,8 @@ var TodoList = function TodoList(props) {
       todo: todo,
       key: todo.id,
       removeTodo: props.removeTodo,
-      recieveTodo: props.recieveTodo
+      clearErrors: props.clearErrors,
+      updateTodo: props.updateTodo
     }); // recieveTodo prop/action here in the list item is to change
     // 'done' boolean property as a button that will be rendered in component
   });
@@ -771,9 +782,6 @@ var msp = function msp(state) {
 
 var mdp = function mdp(dispatch) {
   return {
-    recieveTodo: function recieveTodo(todo) {
-      return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["recieveTodo"])(todo));
-    },
     fetchTodos: function fetchTodos() {
       return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchTodos"])());
     },
@@ -782,6 +790,9 @@ var mdp = function mdp(dispatch) {
     },
     clearErrors: function clearErrors() {
       return dispatch(Object(_actions_error_actions__WEBPACK_IMPORTED_MODULE_4__["clearErrors"])());
+    },
+    updateTodo: function updateTodo(todo) {
+      return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["updateTodo"])(todo));
     } // removeTodo: id => dispatch(removeTodo(id))
 
   };
@@ -834,22 +845,19 @@ var TodoListItem = function TodoListItem(props) {
 
   }, []);
 
-  var updateTodo = function updateTodo() {
-    var newTodo;
-
-    if (props.todo.done === true) {
-      newTodo = Object.assign({}, props.todo, {
-        done: false
-      });
-      setDone(false);
-    } else {
-      newTodo = Object.assign({}, props.todo, {
-        done: true
-      });
-      setDone(true);
-    }
-
-    props.recieveTodo(newTodo);
+  var updateTodo = function updateTodo(e) {
+    e.preventDefault();
+    var toggleTodo = Object.assign({}, props.todo, {
+      done: !props.todo.done
+    });
+    setDone(!props.todo.done);
+    props.updateTodo(toggleTodo); // if (props.todo.done === true) {
+    //   toggleTodo = Object.assign({}, props.todo, { done: false });
+    //   setDone(false);
+    // } else {
+    //   toggleTodo = Object.assign({}, props.todo, { done: true });
+    //   setDone(true);
+    // }
   };
 
   var toggleDetail = function toggleDetail() {
@@ -1224,13 +1232,14 @@ var uniqueId = function uniqueId() {
 /*!****************************************!*\
   !*** ./frontend/util/todo_api_util.js ***!
   \****************************************/
-/*! exports provided: fetchTodos, createTodo */
+/*! exports provided: fetchTodos, createTodo, updateTodo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTodos", function() { return fetchTodos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTodo", function() { return createTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTodo", function() { return updateTodo; });
 var fetchTodos = function fetchTodos() {
   return $.ajax({
     method: "GET",
@@ -1241,6 +1250,15 @@ var createTodo = function createTodo(todo) {
   return $.ajax({
     method: "POST",
     url: "/api/todos",
+    data: {
+      todo: todo
+    }
+  });
+};
+var updateTodo = function updateTodo(todo) {
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/todos/".concat(todo.id),
     data: {
       todo: todo
     }

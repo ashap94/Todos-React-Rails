@@ -23,7 +23,7 @@ class Api::TodosController < ApplicationController
 
     def update
         @todo = Todo.find(params[:id])
-        if @todo.update(todo_params)
+        if @todo.update(todo_update_params)
             render json: @todo
         else
             render json: @todo.errors.full_messages, status: 422
@@ -42,10 +42,10 @@ class Api::TodosController < ApplicationController
         params.require(:todo).permit(:title, :body, :done)
     end
 
-    # def todo_update_params
-    #     # using this method may cause issues in that it will only record this property
-    #     # and destroy the other properties? not sure but probably best to go with above method
-    #     params.require(:todo).permit(:done)
-    # end
+    def todo_update_params
+        # using this method may cause issues in that it will only record this property
+        # and destroy the other properties? not sure but probably best to go with above method
+        params.require(:todo).permit(:done)
+    end
 
 end
