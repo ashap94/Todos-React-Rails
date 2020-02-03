@@ -4,7 +4,8 @@ import TodoList from "./todo_list";
 import {
   recieveTodo,
   removeTodo,
-  fetchTodos
+  fetchTodos,
+  createTodo
 } from "../../actions/todo_actions";
 
 const msp = state => {
@@ -16,7 +17,8 @@ const msp = state => {
 const mdp = dispatch => {
   return {
     recieveTodo: todo => dispatch(recieveTodo(todo)),
-    fetchTodos: () => dispatch(fetchTodos())
+    fetchTodos: () => dispatch(fetchTodos()),
+    createTodo: todo => dispatch(createTodo(todo))
     // removeTodo: id => dispatch(removeTodo(id))
   };
 };

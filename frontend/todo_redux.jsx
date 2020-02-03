@@ -7,7 +7,7 @@ import * as StepsActions from "./actions/step_actions";
 import Root from "./components/root";
 import { allTodos, stepsByTodoId } from "./reducers/selectors";
 
-console.log("WHAT ARE THE TODOS ACTIONS? :  ", TodoActions);
+// console.log("WHAT ARE THE TODOS ACTIONS? :  ", TodoActions);
 
 document.addEventListener("DOMContentLoaded", () => {
   const preloadedState =
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.recieveSteps = StepsActions.recieveSteps;
   window.recieveStep = StepsActions.recieveStep;
   window.fetchTodos = TodoActions.fetchTodos;
+  window.createTodo = TodoActions.createTodo;
   window.stepsByTodoId = stepsByTodoId;
 
   window.getState = store.getState;

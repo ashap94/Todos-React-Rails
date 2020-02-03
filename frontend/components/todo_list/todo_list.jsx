@@ -11,6 +11,8 @@ const TodoList = props => {
     });
   }, []);
 
+  // useEffect(() => {}, [props.todos]);
+
   if (!loaded) {
     return null;
   }
@@ -31,7 +33,7 @@ const TodoList = props => {
   return (
     <div>
       <h3>Todo List goes here!</h3>
-      <TodoForm recieveTodo={props.recieveTodo} />
+      <TodoForm createTodo={props.createTodo} />
       <ul>{list}</ul>
     </div>
   );

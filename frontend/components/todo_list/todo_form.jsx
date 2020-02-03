@@ -23,14 +23,14 @@ const TodoForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const todo = {
-      id: uniqueId(),
       title,
       body,
-      done
+      done: false
     };
-    props.recieveTodo(todo);
-    setBody("");
-    setTitle("");
+    props.createTodo(todo).then(() => {
+      setBody("");
+      setTitle("");
+    });
   };
 
   return (
