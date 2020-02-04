@@ -3,7 +3,7 @@ import StepListContainer from "../step_list/step_list_container";
 
 const TodoDetailView = props => {
   const deleteTodo = () => {
-    props.removeTodo(props.todo.id);
+    props.deleteTodo(props.todo.id);
   };
 
   return (

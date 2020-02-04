@@ -3,7 +3,6 @@ import { allTodos } from "../../reducers/selectors";
 import TodoList from "./todo_list";
 import {
   recieveTodo,
-  removeTodo,
   fetchTodos,
   createTodo,
   updateTodo
@@ -23,8 +22,6 @@ const mdp = dispatch => {
     createTodo: todo => dispatch(createTodo(todo)),
     clearErrors: () => dispatch(clearErrors()),
     updateTodo: todo => dispatch(updateTodo(todo))
-
-    // removeTodo: id => dispatch(removeTodo(id))
   };
 };
 

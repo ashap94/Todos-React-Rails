@@ -2066,3 +2066,181 @@ Processing by Api::TodosController#index as JSON
 Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.6ms)
 
 
+Started GET "/" for ::1 at 2020-02-03 16:35:20 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 371ms (Views: 369.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todos" for ::1 at 2020-02-03 16:35:21 -0800
+Processing by Api::TodosController#index as JSON
+  [1m[36mTodo Load (0.8ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+  ↳ app/controllers/api/todos_controller.rb:8
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/api/todos" for ::1 at 2020-02-03 16:35:26 -0800
+Processing by Api::TodosController#create as JSON
+  Parameters: {"todo"=>{"title"=>"fewfew", "body"=>"fewfewwefefw", "done"=>"false"}}
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:17
+  [1m[36mTodo Create (0.7ms)[0m  [1m[32mINSERT INTO "todos" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "fewfew"], ["body", "fewfewwefefw"], ["done", false], ["created_at", "2020-02-04 00:35:26.380994"], ["updated_at", "2020-02-04 00:35:26.380994"]]
+  ↳ app/controllers/api/todos_controller.rb:17
+  [1m[35m (40.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:17
+Completed 200 OK in 48ms (Views: 0.6ms | ActiveRecord: 43.0ms)
+
+
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started PATCH "/api/todos/15" for ::1 at 2020-02-03 16:35:39 -0800
+Processing by Api::TodosController#update as JSON
+  Parameters: {"todo"=>{"id"=>"15", "title"=>"fewfew", "body"=>"fewfewwefefw", "done"=>"true", "created_at"=>"2020-02-04T00:35:26.380Z", "updated_at"=>"2020-02-04T00:35:26.380Z"}, "id"=>"15"}
+  [1m[36mTodo Load (0.6ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:25
+Unpermitted parameters: :id, :title, :body, :created_at, :updated_at
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[36mTodo Update (0.4ms)[0m  [1m[33mUPDATE "todos" SET "done" = $1, "updated_at" = $2 WHERE "todos"."id" = $3[0m  [["done", true], ["updated_at", "2020-02-04 00:35:39.119889"], ["id", 15]]
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 2.9ms)
+
+
+Started PATCH "/api/todos/15" for ::1 at 2020-02-03 16:35:53 -0800
+Processing by Api::TodosController#update as JSON
+  Parameters: {"todo"=>{"id"=>"15", "done"=>"false", "title"=>"fewfew", "body"=>"fewfewwefefw", "created_at"=>"2020-02-04T00:35:26.380Z", "updated_at"=>"2020-02-04T00:35:39.119Z"}, "id"=>"15"}
+  [1m[36mTodo Load (0.4ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:25
+Unpermitted parameters: :id, :title, :body, :created_at, :updated_at
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[36mTodo Update (0.5ms)[0m  [1m[33mUPDATE "todos" SET "done" = $1, "updated_at" = $2 WHERE "todos"."id" = $3[0m  [["done", false], ["updated_at", "2020-02-04 00:35:53.732893"], ["id", 15]]
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 2.4ms)
+
+
+Started PATCH "/api/todos/15" for ::1 at 2020-02-03 16:36:02 -0800
+Processing by Api::TodosController#update as JSON
+  Parameters: {"todo"=>{"id"=>"15", "done"=>"true", "title"=>"fewfew", "body"=>"fewfewwefefw", "created_at"=>"2020-02-04T00:35:26.380Z", "updated_at"=>"2020-02-04T00:35:53.732Z"}, "id"=>"15"}
+  [1m[36mTodo Load (0.6ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:25
+Unpermitted parameters: :id, :title, :body, :created_at, :updated_at
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[36mTodo Update (0.4ms)[0m  [1m[33mUPDATE "todos" SET "done" = $1, "updated_at" = $2 WHERE "todos"."id" = $3[0m  [["done", true], ["updated_at", "2020-02-04 00:36:02.493304"], ["id", 15]]
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/" for ::1 at 2020-02-03 16:36:03 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 37ms (Views: 34.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todos" for ::1 at 2020-02-03 16:36:04 -0800
+Processing by Api::TodosController#index as JSON
+  [1m[36mTodo Load (2.0ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+  ↳ app/controllers/api/todos_controller.rb:8
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 2.0ms)
+
+
+  [1m[36mTodo Load (0.4ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started PATCH "/api/todos/15" for ::1 at 2020-02-03 16:36:15 -0800
+Processing by Api::TodosController#update as JSON
+  Parameters: {"todo"=>{"id"=>"15", "title"=>"fewfew", "body"=>"fewfewwefefw", "done"=>"false", "created_at"=>"2020-02-04T00:35:26.380Z", "updated_at"=>"2020-02-04T00:36:02.493Z"}, "id"=>"15"}
+  [1m[36mTodo Load (0.5ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:25
+Unpermitted parameters: :id, :title, :body, :created_at, :updated_at
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[36mTodo Update (0.7ms)[0m  [1m[33mUPDATE "todos" SET "done" = $1, "updated_at" = $2 WHERE "todos"."id" = $3[0m  [["done", false], ["updated_at", "2020-02-04 00:36:15.057451"], ["id", 15]]
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 2.8ms)
+
+
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started PATCH "/api/todos/15" for ::1 at 2020-02-03 16:36:21 -0800
+Processing by Api::TodosController#update as JSON
+  Parameters: {"todo"=>{"id"=>"15", "done"=>"true", "title"=>"fewfew", "body"=>"fewfewwefefw", "created_at"=>"2020-02-04T00:35:26.380Z", "updated_at"=>"2020-02-04T00:36:15.057Z"}, "id"=>"15"}
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:25
+Unpermitted parameters: :id, :title, :body, :created_at, :updated_at
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[36mTodo Update (0.4ms)[0m  [1m[33mUPDATE "todos" SET "done" = $1, "updated_at" = $2 WHERE "todos"."id" = $3[0m  [["done", true], ["updated_at", "2020-02-04 00:36:21.293259"], ["id", 15]]
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 2.3ms)
+
+
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started DELETE "/api/todos/15" for ::1 at 2020-02-03 16:36:52 -0800
+Processing by Api::TodosController#destroy as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:34
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:35
+  [1m[36mTodo Destroy (0.4ms)[0m  [1m[31mDELETE FROM "todos" WHERE "todos"."id" = $1[0m  [["id", 15]]
+  ↳ app/controllers/api/todos_controller.rb:35
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:35
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 2.2ms)
+
+
+  [1m[36mTodo Load (0.4ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started POST "/api/todos" for ::1 at 2020-02-03 16:37:10 -0800
+Processing by Api::TodosController#create as JSON
+  Parameters: {"todo"=>{"title"=>"fawfewweaf", "body"=>"weffewewfweffawewefawwfeafew", "done"=>"false"}}
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:17
+  [1m[36mTodo Create (0.6ms)[0m  [1m[32mINSERT INTO "todos" ("title", "body", "done", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "fawfewweaf"], ["body", "weffewewfweffawewefawwfeafew"], ["done", false], ["created_at", "2020-02-04 00:37:10.791393"], ["updated_at", "2020-02-04 00:37:10.791393"]]
+  ↳ app/controllers/api/todos_controller.rb:17
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:17
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 2.3ms)
+
+
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started PATCH "/api/todos/16" for ::1 at 2020-02-03 16:37:20 -0800
+Processing by Api::TodosController#update as JSON
+  Parameters: {"todo"=>{"id"=>"16", "title"=>"fawfewweaf", "body"=>"weffewewfweffawewefawwfeafew", "done"=>"true", "created_at"=>"2020-02-04T00:37:10.791Z", "updated_at"=>"2020-02-04T00:37:10.791Z"}, "id"=>"16"}
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:25
+Unpermitted parameters: :id, :title, :body, :created_at, :updated_at
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[36mTodo Update (0.4ms)[0m  [1m[33mUPDATE "todos" SET "done" = $1, "updated_at" = $2 WHERE "todos"."id" = $3[0m  [["done", true], ["updated_at", "2020-02-04 00:37:20.159200"], ["id", 16]]
+  ↳ app/controllers/api/todos_controller.rb:26
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:26
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 2.2ms)
+
+
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+Started DELETE "/api/todos/16" for ::1 at 2020-02-03 16:37:27 -0800
+Processing by Api::TodosController#destroy as JSON
+  Parameters: {"id"=>"16"}
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT  "todos".* FROM "todos" WHERE "todos"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/api/todos_controller.rb:34
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/todos_controller.rb:35
+  [1m[36mTodo Destroy (0.5ms)[0m  [1m[31mDELETE FROM "todos" WHERE "todos"."id" = $1[0m  [["id", 16]]
+  ↳ app/controllers/api/todos_controller.rb:35
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/todos_controller.rb:35
+Completed 200 OK in 6ms (Views: 0.4ms | ActiveRecord: 2.2ms)
+
+
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m

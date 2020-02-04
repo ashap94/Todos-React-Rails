@@ -158,7 +158,7 @@ var removeStep = function removeStep(id) {
 /*!******************************************!*\
   !*** ./frontend/actions/todo_actions.js ***!
   \******************************************/
-/*! exports provided: RECIEVE_TODOS, RECIEVE_TODO, REMOVE_TODO, recieveTodos, recieveTodo, removeTodo, fetchTodos, createTodo, updateTodo */
+/*! exports provided: RECIEVE_TODOS, RECIEVE_TODO, REMOVE_TODO, recieveTodos, recieveTodo, removeTodo, fetchTodos, createTodo, updateTodo, deleteTodo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -172,6 +172,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTodos", function() { return fetchTodos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTodo", function() { return createTodo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTodo", function() { return updateTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTodo", function() { return deleteTodo; });
 /* harmony import */ var _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/todo_api_util */ "./frontend/util/todo_api_util.js");
 /* harmony import */ var _error_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error_actions */ "./frontend/actions/error_actions.js");
 var RECIEVE_TODOS = "RECIEVE_TODOS";
@@ -217,6 +218,15 @@ var updateTodo = function updateTodo(todo) {
   return function (dispatch) {
     return _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__["updateTodo"](todo).then(function (todo) {
       return dispatch(recieveTodo(todo));
+    }, function (err) {
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(err.responseJSON));
+    });
+  };
+};
+var deleteTodo = function deleteTodo(todoId) {
+  return function (dispatch) {
+    return _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteTodo"](todoId).then(function (todo) {
+      return dispatch(removeTodo(todo.id));
     }, function (err) {
       return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(err.responseJSON));
     });
@@ -543,7 +553,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var TodoDetailView = function TodoDetailView(props) {
   var deleteTodo = function deleteTodo() {
-    props.removeTodo(props.todo.id);
+    props.deleteTodo(props.todo.id);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.todo.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_step_list_step_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -579,8 +589,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mdp = function mdp(dispatch) {
   return {
-    removeTodo: function removeTodo(id) {
-      return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_1__["removeTodo"])(id));
+    deleteTodo: function deleteTodo(id) {
+      return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_1__["deleteTodo"])(id));
     }
   };
 };
@@ -736,7 +746,6 @@ var TodoList = function TodoList(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_todo_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
       todo: todo,
       key: todo.id,
-      removeTodo: props.removeTodo,
       clearErrors: props.clearErrors,
       updateTodo: props.updateTodo
     }); // recieveTodo prop/action here in the list item is to change
@@ -793,8 +802,7 @@ var mdp = function mdp(dispatch) {
     },
     updateTodo: function updateTodo(todo) {
       return dispatch(Object(_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__["updateTodo"])(todo));
-    } // removeTodo: id => dispatch(removeTodo(id))
-
+    }
   };
 };
 
@@ -1232,7 +1240,7 @@ var uniqueId = function uniqueId() {
 /*!****************************************!*\
   !*** ./frontend/util/todo_api_util.js ***!
   \****************************************/
-/*! exports provided: fetchTodos, createTodo, updateTodo */
+/*! exports provided: fetchTodos, createTodo, updateTodo, deleteTodo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1240,6 +1248,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTodos", function() { return fetchTodos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTodo", function() { return createTodo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTodo", function() { return updateTodo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTodo", function() { return deleteTodo; });
 var fetchTodos = function fetchTodos() {
   return $.ajax({
     method: "GET",
@@ -1262,6 +1271,12 @@ var updateTodo = function updateTodo(todo) {
     data: {
       todo: todo
     }
+  });
+};
+var deleteTodo = function deleteTodo(todoId) {
+  return $.ajax({
+    method: "DELETE",
+    url: "/api/todos/".concat(todoId)
   });
 };
 
