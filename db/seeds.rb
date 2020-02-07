@@ -7,15 +7,29 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Todo.delete_all
+Step.delete_all
 
-Todo.create!(
+todo1 = Todo.create!(
     title: 'Contemplate the meaning of life',
     body: 'between homeworks and readings',
     done: false
 )
 
-Todo.create!(
+todo2 = Todo.create!(
     title: 'Code everyday',
     body: 'get better at them algo\'s, data structure\'s and projects',
+    done: false
+)
+
+step1 = Step.create!(
+    title: 'practice algo\'s and data structures',
+    todo_id: todo2.id,
+    done: false
+)
+
+step2 = Step.create!(
+    title: 'code out several projects using react/rails stack',
+    body: "balance out work schedule",
+    todo_id: todo2.id,
     done: false
 )
