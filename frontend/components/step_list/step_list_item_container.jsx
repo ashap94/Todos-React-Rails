@@ -3,7 +3,9 @@ import StepListItem from "./step_list_item";
 import {
   removeStep,
   recieveStep,
-  recieveSteps
+  recieveSteps,
+  updateStep,
+  deleteStep
 } from "../../actions/step_actions";
 
 // const msp = state => {
@@ -15,8 +17,10 @@ import {
 
 const mdp = dispatch => {
   return {
-    recieveStep: step => dispatch(recieveStep(step)),
-    removeStep: id => dispatch(removeStep(id))
+    // recieveStep: step => dispatch(recieveStep(step)),
+    // removeStep: id => dispatch(removeStep(id)),
+    updateStep: step => dispatch(updateStep(step)),
+    deleteStep: stepId => dispatch(deleteStep(stepId))
   };
 };
 

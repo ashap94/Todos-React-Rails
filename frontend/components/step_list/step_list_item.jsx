@@ -8,17 +8,17 @@ const StepListItem = props => {
     let step = Object.assign({}, props.step);
     if (done === true) {
       step["done"] = false;
-      props.recieveStep(step);
+      props.updateStep(step);
       setDone(false);
     } else {
       step["done"] = true;
-      props.recieveStep(step);
+      props.updateStep(step);
       setDone(true);
     }
   };
 
   const deleteStep = () => {
-    props.removeStep(props.step.id);
+    props.deleteStep(props.step.id);
   };
 
   return (

@@ -22,7 +22,7 @@ const StepForm = props => {
       todo_id: props.todo_id,
       done: false
     };
-    props.recieveStep(step);
+    props.createStep(step);
     setTitle("");
     setBody("");
   };
@@ -36,7 +36,6 @@ const StepForm = props => {
           onChange={updateTitle}
           value={title}
           placeholder="walk to store"
-          required
         />
       </label>
       <label>
@@ -46,7 +45,6 @@ const StepForm = props => {
           onChange={updateBody}
           value={body}
           placeholder="google store directions"
-          required
         />
       </label>
       <button className="create-button">Create Step!</button>

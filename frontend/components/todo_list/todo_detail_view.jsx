@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import StepListContainer from "../step_list/step_list_container";
 
 const TodoDetailView = props => {
+  useEffect(() => {
+    props.fetchSteps(props.todo.id);
+  }, []);
+
   const deleteTodo = () => {
     props.deleteTodo(props.todo.id);
   };

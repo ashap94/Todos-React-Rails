@@ -12,7 +12,7 @@ const StepList = props => {
   return (
     <div>
       <ul>{stepItems}</ul>
-      <StepForm recieveStep={props.recieveStep} todo_id={props.todo_id} />
+      <StepForm createStep={props.createStep} todo_id={props.todo_id} />
     </div>
   );
 };

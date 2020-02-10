@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import StepList from "./step_list";
-import { recieveStep, recieveSteps } from "../../actions/step_actions";
+import {
+  recieveStep,
+  recieveSteps,
+  createStep
+} from "../../actions/step_actions";
 import { stepsByTodoId } from "../../reducers/selectors";
 
 const msp = (state, ownProps) => {
@@ -18,7 +22,8 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => {
   return {
-    recieveStep: step => dispatch(recieveStep(step))
+    recieveStep: step => dispatch(recieveStep(step)),
+    createStep: step => dispatch(createStep(step))
   };
 };
 
