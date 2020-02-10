@@ -4,5 +4,8 @@ class Todo < ApplicationRecord
     validates :done, inclusion: { in: [true, false] }
     
     has_many :steps, dependent: :destroy
+
+    has_many :taggings, :dependent => true
+    has_many :tags, :through => :taggings
     
 end
