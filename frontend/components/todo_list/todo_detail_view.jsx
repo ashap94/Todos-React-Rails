@@ -14,6 +14,11 @@ const TodoDetailView = props => {
     <div>
       <p>{props.todo.body}</p>
       <StepListContainer todo_id={props.todo.id} />
+      <ul>
+        {props.todo.tags.map(tag => (
+          <li key={tag.id}>{tag.name}</li>
+        ))}
+      </ul>
       <button onClick={deleteTodo}>Delete Todo</button>
     </div>
   );

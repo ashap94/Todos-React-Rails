@@ -599,7 +599,11 @@ var TodoDetailView = function TodoDetailView(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.todo.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_step_list_step_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
     todo_id: props.todo.id
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, props.todo.tags.map(function (tag) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: tag.id
+    }, tag.name);
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: deleteTodo
   }, "Delete Todo"));
 };
@@ -655,6 +659,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util_id_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/id_util */ "./frontend/util/id_util.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -680,7 +692,17 @@ var TodoForm = function TodoForm(props) {
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState6 = _slicedToArray(_useState5, 2),
       done = _useState6[0],
-      setDone = _useState6[1]; //   const [id, setId] = useState(null);
+      setDone = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      tag_names = _useState8[0],
+      settag_names = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      newTag = _useState10[0],
+      setNewTag = _useState10[1]; //   const [id, setId] = useState(null);
   //   useEffect(() => {
   //     setId(uniqueId());
   //     console.log("HERE'S WHAT THE ID LOOKS LIKE", id);
@@ -695,22 +717,54 @@ var TodoForm = function TodoForm(props) {
     setBody(e.target.value);
   };
 
+  var updateNewTag = function updateNewTag(e) {
+    setNewTag(e.target.value);
+  };
+
+  var addNewTag = function addNewTag(e) {
+    if (newTag.length > 0) {
+      var _tags = [].concat(_toConsumableArray(tag_names), [newTag]);
+
+      settag_names(_tags);
+      setNewTag("");
+    }
+  };
+
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var todo = {
       title: title,
       body: body,
-      done: false
+      done: false,
+      tag_names: tag_names
     };
     props.createTodo(todo).then(function () {
       setBody("");
       setTitle("");
+      settag_names([]);
     });
     props.clearErrors();
   };
 
+  var removeTag = function removeTag(idx) {
+    var newTags = tag_names.filter(function (_, index) {
+      return index !== idx;
+    });
+    settag_names(newTags);
+  };
+
   var titleError = props.errors.includes("Title can't be blank") ? "Title can't be blank" : null;
   var bodyError = props.errors.includes("Body can't be blank") ? "Body can't be blank" : null;
+  var tags = tag_names.map(function (tag, idx) {
+    var clickHandler = function clickHandler() {
+      return removeTag(idx);
+    };
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: idx,
+      onClick: clickHandler
+    }, tag);
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "todo-form",
     onSubmit: handleSubmit
@@ -728,7 +782,14 @@ var TodoForm = function TodoForm(props) {
     onChange: updateBody,
     placeholder: "soy, buy flavorless and the cheapest one" // required
 
-  })), bodyError, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Tags", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    placeholder: "Enter a new tag",
+    value: newTag,
+    onChange: updateNewTag
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    onClick: addNewTag
+  }, "Add Tag")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, tags), bodyError, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "create-button"
   }, "Create Todo!"));
 };
